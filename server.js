@@ -6,7 +6,7 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT
 const dbURL = process.env.MONGODB_URL
-const recipeRouter = require('./controllers/recipes')
+const recipeRouter = require('./controllers/recipeRouter')
 
 app.use('/', recipeRouter)
 

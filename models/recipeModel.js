@@ -19,7 +19,7 @@ const recipeSchema = new Schema(
 )
 
 // define recipe schema in mongoose model. First parameter is the name, second parameter is the schema
-const Recipe = mongoose.model('Recipe', recipeSchema)
+const RecipeModel = mongoose.model('Recipe', recipeSchema)
 
 // Export Recipe schema for access in other files
-module.exports = Recipe
+module.exports = RecipeModel

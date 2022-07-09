@@ -3,7 +3,7 @@ const express = require('express')
 // Set recipe router
 const recipeRouter = express.Router()
 // Require recipe schema
-const Recipe = require('../models/recipes')
+const RecipeModel = require('../models/recipeModel')
 
 // ============ NEW GET /recipe/new ============ //
 recipeRouter.get('/recipe/new', (req, res) => {
@@ -11,6 +11,9 @@ recipeRouter.get('/recipe/new', (req, res) => {
 })
 
 // ============ CREATE POST rdr /recipe ============ //
+recipeRouter.post('/', (req, res) => {
+    
+})
 
 // ============ HOME GET / ============ //
 recipeRouter.get('/', (req, res) => {
@@ -19,7 +22,7 @@ recipeRouter.get('/', (req, res) => {
 
 // ============ INDEX GET /recipe ============ //
 recipeRouter.get('/recipe', (req, res) => {
-    Recipe.find()
+    RecipeModel.find()
         .exec()
         .then((recipes) => {
             res.send(recipes)
