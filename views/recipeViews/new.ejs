@@ -1,0 +1,41 @@
+<h1>Create New Recipe</h1>
+<form action="/" method="post">
+
+    <p>
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" required>
+    </p>
+
+    <p>
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" required>
+    </p>
+
+    <p>
+        <label for="description">Description</label>
+        <input type="textarea" name="description" id="description">
+    </p>
+
+    <p>
+        <label for="serves">Serves</label>
+        <input type="number" name="serves" id="serves" min="1" required>
+    </p>
+
+    <p>
+        <label for="cookTime">Cook time</label>
+        <input type="number" name="cookTime" id="cookTime" min="1" max="60" required>
+        <label for="cookTime">mins</label>
+    </p>
+
+    <p>
+        <label for="ingredients">Ingredients</label>
+        <input type="textarea" name="ingredients" id="ingredients">
+    </p> 
+
+    <p>
+        <label for="methods">Methods</label>
+        <input type="textarea" name="methods" id="methods">
+    </p>
+    
+    <input type="submit" value="Create">
+</form>

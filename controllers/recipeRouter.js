@@ -5,22 +5,40 @@ const recipeRouter = express.Router()
 // Require recipe schema
 const RecipeModel = require('../models/recipeModel')
 
-// ============ NEW GET /recipe/new ============ //
+// CREATE - allow user to enter new recipe data and store data in database
+// ============ NEW GET /recipe/new (render: new.ejs) ============ //
 recipeRouter.get('/recipe/new', (req, res) => {
-    res.send('create new recipe')
+    res.render('recipeViews/new.ejs', {
+        tabTitle: 'Create New Recipe'
+    })
 })
 
-// ============ CREATE POST rdr /recipe ============ //
+// ============ CREATE POST (redirect to /recipe) ============ //
 recipeRouter.post('/', (req, res) => {
-    
+    console.log('post request received');
+    // console.log(req.body);
+    req.body.serves = parseInt(req.body.serves)
+    req.body.cookTime = parseInt(req.body.cookTime)
+    req.body.ingredients = [req.body.ingredients]
+    req.body.methods = [req.body.methods]
+    console.log(req.body);
+    RecipeModel.create(req.body)
+        .then(() => {
+            res.redirect(req.baseUrl + '/recipe')
+        })
+        .catch((err) => {
+            console.log("Error creating new recipe:", err);
+        })
 })
 
-// ============ HOME GET / ============ //
+// READ - show user the homepage with highlighted recipes
+// ============ HOME GET / (render: home.ejs) ============ //
 recipeRouter.get('/', (req, res) => {
     res.send('homepage')
 })
 
-// ============ INDEX GET /recipe ============ //
+// READ - show user the page with all recipe
+// ============ INDEX GET /recipe (render: index.ejs)============ //
 recipeRouter.get('/recipe', (req, res) => {
     RecipeModel.find()
         .exec()
@@ -29,19 +47,22 @@ recipeRouter.get('/recipe', (req, res) => {
         })
 })
 
-// ============ SHOW GET /recipe/:id ============ //
+// READ - show user the page of a specific recipe
+// ============ SHOW GET /recipe/:id (render: show.ejs) ============ //
 recipeRouter.get('/recipe/:id', (req, res) => {
     res.send('show recipe id' + req.params.id)
 })
 
-// ============ EDIT GET /recipe/:id/edit ============ //
+// UPDATE - allow user to edit an existing recipe and update the data in db
+// ============ EDIT GET /recipe/:id/edit (render: edit.ejs) ============ //
 recipeRouter.get('/recipe/:id/edit', (req, res) => {
     res.send('edit recipe id' + req.params.id)
 })
 
-// ============ UPDATE PUT rdr /recipe/:id ============ //
+// ============ UPDATE PUT (redirect to: /recipe/:id) ============ //
 
-// ============ DELETE DELETE rdr /recipe ============ //
+// DELETE - allow user to delete and existing recipe (from the db as well)
+// ============ DELETE DELETE (redirect to: /recipe) ============ //
 
 // Export router for access in server.js
 module.exports = recipeRouter

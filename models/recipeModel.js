@@ -11,7 +11,7 @@ const recipeSchema = new Schema(
     serves: { type: Number, required: true },
     cookTime: { type: Number, required: true, max: 60 },
     ingredients: [ { type: String } ],
-    method: [ { type: String } ],
+    methods: [ { type: String } ],
     img: { type: String, default: 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg' },
     author: String
   },
