@@ -34,7 +34,9 @@ recipeRouter.post('/', (req, res) => {
 // READ - show user the homepage with highlighted recipes
 // ============ HOME GET / (render: home.ejs) ============ //
 recipeRouter.get('/', (req, res) => {
-    res.send('homepage')
+    res.render('recipeViews/home.ejs', {
+        tabTitle: 'Home'
+    })
 })
 
 // READ - show user the page with all recipe
@@ -43,7 +45,11 @@ recipeRouter.get('/recipe', (req, res) => {
     RecipeModel.find()
         .exec()
         .then((recipes) => {
-            res.send(recipes)
+            console.log(recipes);
+            res.render('recipeViews/index.ejs', {
+                allRecipes: recipes,
+                tabTitle: 'all recipe'
+            })
         })
 })
 

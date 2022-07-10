@@ -1,0 +1,17 @@
+<nav>
+    <a href="/">Home icon</a>
+</nav>
+<h1>All Recipes</h1>
+<main>
+    <% for (let recipe of allRecipes) { %>
+    <div>
+        <a href="/recipe/<%= recipe.id %>">
+            <img src="<%= recipe.img %>" alt="<%= recipe.title %>">
+            <div class="infobar">
+                <h3><%= recipe.title %></h3>
+                <h3>Cook Time: <%= recipe.cookTime %>mins</h3>
+            </div>
+        </a>
+    </div>
+    <% } %>
+</main>
