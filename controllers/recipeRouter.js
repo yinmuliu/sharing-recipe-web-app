@@ -9,6 +9,7 @@ const RecipeModel = require('../models/recipeModel')
 // ============ NEW GET /recipe/new (render: new.ejs) ============ //
 recipeRouter.get('/recipe/new', (req, res) => {
     res.render('recipeViews/new.ejs', {
+        baseUrl: req.baseUrl,
         tabTitle: 'Create New Recipe'
     })
 })
@@ -16,7 +17,6 @@ recipeRouter.get('/recipe/new', (req, res) => {
 // ============ CREATE POST (redirect to /recipe) ============ //
 recipeRouter.post('/', (req, res) => {
     console.log('post request received');
-    // console.log(req.body);
     req.body.serves = parseInt(req.body.serves)
     req.body.cookTime = parseInt(req.body.cookTime)
     req.body.ingredients = [req.body.ingredients]
@@ -35,6 +35,7 @@ recipeRouter.post('/', (req, res) => {
 // ============ HOME GET / (render: home.ejs) ============ //
 recipeRouter.get('/', (req, res) => {
     res.render('recipeViews/home.ejs', {
+        baseUrl: req.baseUrl,
         tabTitle: 'Home'
     })
 })
@@ -47,6 +48,7 @@ recipeRouter.get('/recipe', (req, res) => {
         .then((recipes) => {
             res.render('recipeViews/index.ejs', {
                 allRecipes: recipes,
+                baseUrl: req.baseUrl,
                 tabTitle: 'all recipe'
             })
         })
@@ -55,7 +57,6 @@ recipeRouter.get('/recipe', (req, res) => {
 // READ - show user the page of a specific recipe
 // ============ SHOW GET /recipe/:id (render: show.ejs) ============ //
 recipeRouter.get('/recipe/:id', (req, res) => {
-    // console.log(req.baseUrl);
     RecipeModel.findById(req.params.id)
         .exec()
         .then((recipe) => {
@@ -75,6 +76,7 @@ recipeRouter.get('/recipe/:id/edit', (req, res) => {
         .then((recipe) => {
             res.render('recipeViews/edit.ejs', {
                 recipe: recipe,
+                baseUrl: req.baseUrl,
                 tabTitle: `Edit ${recipe.title}`
             })
         })
@@ -90,7 +92,7 @@ recipeRouter.put('/recipe/:id/edit', (req, res) => {
         .exec()
         .then((updatedRecipe) => {
             console.log(updatedRecipe);
-            res.redirect(`/recipe/${req.params.id}`)
+            res.redirect(req.baseUrl + `/recipe/${req.params.id}`)
         })
         .catch((err) => {
             console.log("Error updating new recipe:", err);
@@ -103,7 +105,7 @@ recipeRouter.delete('/:id', (req, res) => {
     RecipeModel.findByIdAndDelete(req.params.id)
         .exec()
         .then(() => {
-            res.redirect('/recipe')
+            res.redirect(req.baseUrl + '/recipe')
         })         
 })
 

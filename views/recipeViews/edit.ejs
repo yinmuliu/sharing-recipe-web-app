@@ -1,11 +1,11 @@
 <nav>
-    <a href="/">Home icon</a>
-    <a href="/recipe">View All Recipes</a>
+    <a href="<%= baseUrl %>">Home icon</a>
+    <a href="<%= baseUrl %>/recipe">View All Recipes</a>
 </nav>
 <h1>Edit Recipe</h1>
 <main>
     <h1></h1>
-    <form action="/recipe/<%= recipe.id %>/edit?_method=put" method="post">
+    <form action="<%= baseUrl %>/recipe/<%= recipe.id %>/edit?_method=put" method="post">
         <div>
             <label for="img">Update image url</label>
             <input type="text" name="img" id="img" value="<%= recipe.img %>">

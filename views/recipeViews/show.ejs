@@ -1,5 +1,5 @@
 <nav>
-    <a href="/">Home icon</a>
+    <a href="<%= baseUrl %>">Home icon</a>
     <a href="<%= baseUrl %>/recipe">View All Recipes</a>
 </nav>
 <h1><%= recipe.title %></h1>
@@ -25,8 +25,8 @@
     </ul>
 </div>
 <div>
-    <a href="/recipe/<%= recipe.id %>/edit">Edit Recipe</a>
-    <form action="/<%= recipe.id %>?_method=delete" method="post">
+    <a href="<%= baseUrl %>/recipe/<%= recipe.id %>/edit">Edit Recipe</a>
+    <form action="<%= baseUrl %>/<%= recipe.id %>?_method=delete" method="post">
         <input type="submit" value="Delete Recipe">
     </form>
 </div>

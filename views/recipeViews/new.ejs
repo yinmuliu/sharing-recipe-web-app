@@ -1,10 +1,10 @@
 <nav>
-    <a href="/">Home icon</a>
-    <a href="/recipe">View All Recipes</a>
+    <a href="<%= baseUrl %>">Home icon</a>
+    <a href="<%= baseUrl %>/recipe">View All Recipes</a>
 </nav>
 <h1>Create New Recipe</h1>
 <p>At Easy Peasy, we love quick and easy recipes that can be prepared under 60 minutes!</p>
-<form action="/" method="post">
+<form action="<%= baseUrl %>" method="post">
     <div>
         <label for="img">Upload image url</label>
         <input type="text" name="img" id="img">

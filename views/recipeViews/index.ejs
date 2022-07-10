@@ -1,12 +1,12 @@
 <nav>
-    <a href="/">Home icon</a>
-    <a href="/recipe/new">Share Recipe</a>
+    <a href="<%= baseUrl %>">Home icon</a>
+    <a href="<%= baseUrl %>/recipe/new">Share Recipe</a>
 </nav>
 <h1>All Recipes</h1>
 <main>
     <% for (let recipe of allRecipes) { %>
     <div>
-        <a href="/recipe/<%= recipe.id %>">
+        <a href="<%= baseUrl %>/recipe/<%= recipe.id %>">
             <img src="<%= recipe.img %>" alt="<%= recipe.title %>">
             <div class="infobar">
                 <h3><%= recipe.title %></h3>
