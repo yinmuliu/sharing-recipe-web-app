@@ -1,0 +1,24 @@
+<%- include('../partials/head.ejs') %>
+<nav>
+    <div class="logo"></div>
+    <div class="navigation">
+        <a href="<%= baseUrl %>/recipe">All Recipes</a>
+    </div>
+    <div class="user">
+        <a href="#">Login</a>
+        <a href="#">Sign Up</a>
+    </div>
+</nav>
+<header>
+    <h1>Easy Peasy</h1>
+    <h2>Share quick, easy and healthy recipes to the world!</h2>
+    <div>
+        <a href="<%= baseUrl %>/recipe">View Recipes</a>
+        <a href="<%= baseUrl %>/recipe/new">Share Recipes</a>
+    </div>
+</header>
+<main>
+    <h2>New Recipes</h2>
+    <div class="display"></div>
+</main>
+<%- include('../partials/footer.ejs') %>

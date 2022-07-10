@@ -1,0 +1,52 @@
+<%- include('../partials/head.ejs') %>
+<nav>
+    <a href="<%= baseUrl %>">Home icon</a>
+    <a href="<%= baseUrl %>/recipe">View All Recipes</a>
+</nav>
+<h1>Create New Recipe</h1>
+<p>At Easy Peasy, we love quick and easy recipes that can be prepared under 60 minutes!</p>
+<form action="<%= baseUrl %>" method="post">
+    <div>
+        <label for="img">Upload image url</label>
+        <input type="text" name="img" id="img">
+    </div>
+
+    <div>
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" required>
+    </div>
+
+    <div>
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" required>
+    </div>
+
+    <div>
+        <label for="description">Description</label>
+        <input type="textarea" name="description" id="description">
+    </div>
+
+    <div>
+        <label for="serves">Serves</label>
+        <input type="number" name="serves" id="serves" min="1" required>
+    </div>
+
+    <div>
+        <label for="cookTime">Cook time</label>
+        <input type="number" name="cookTime" id="cookTime" min="1" max="60" required>
+        <label for="cookTime">mins</label>
+    </div>
+
+    <div>
+        <label for="ingredients">Ingredients</label>
+        <input type="textarea" name="ingredients" id="ingredients">
+    </div> 
+
+    <div>
+        <label for="methods">Methods</label>
+        <input type="textarea" name="methods" id="methods">
+    </div>
+    
+    <input type="submit" value="Create">
+</form>
+<%- include('../partials/footer.ejs') %>

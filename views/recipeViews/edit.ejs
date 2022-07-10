@@ -1,0 +1,54 @@
+<%- include('../partials/head.ejs') %>
+<nav>
+    <a href="<%= baseUrl %>">Home icon</a>
+    <a href="<%= baseUrl %>/recipe">View All Recipes</a>
+</nav>
+<h1>Edit Recipe</h1>
+<main>
+    <h1></h1>
+    <form action="<%= baseUrl %>/recipe/<%= recipe.id %>/edit?_method=put" method="post">
+        <div>
+            <label for="img">Update image url</label>
+            <input type="text" name="img" id="img" value="<%= recipe.img %>">
+        </div>
+    
+        <div>
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" value="<%= recipe.author %>" required>
+        </div>
+    
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" value="<%= recipe.title %>" required>
+        </div>
+    
+        <div>
+            <label for="description">Description</label>
+            <input type="textarea" name="description" id="description" value="<%= recipe.description %>">
+        </div>
+    
+        <div>
+            <label for="serves">Serves</label>
+            <input type="number" name="serves" id="serves" min="1" value="<%= recipe.serves %>" required>
+        </div>
+    
+        <div>
+            <label for="cookTime">Cook time</label>
+            <input type="number" name="cookTime" id="cookTime" min="1" max="60" value="<%= recipe.cookTime %>"required>
+            <label for="cookTime">mins</label>
+        </div>
+    
+        <div>
+            <label for="ingredients">Ingredients</label>
+            <input type="textarea" name="ingredients" id="ingredients" value="<%= recipe.ingredients %>">
+        </div> 
+    
+        <div>
+            <label for="methods">Methods</label>
+            <input type="textarea" name="methods" id="methods" value="<%= recipe.methods %>">
+        </div>
+        
+        <input type="submit" value="Update">
+    </form>
+</main>
+<%- include('../partials/footer.ejs') %>

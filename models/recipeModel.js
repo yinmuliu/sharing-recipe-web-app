@@ -11,7 +11,7 @@ const recipeSchema = new Schema(
     serves: { type: Number, required: true },
     cookTime: { type: Number, required: true, max: 60 },
     ingredients: [ { type: String } ],
-    method: [ { type: String } ],
+    methods: [ { type: String } ],
     img: { type: String, default: 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg' },
     author: String
   },
@@ -19,7 +19,7 @@ const recipeSchema = new Schema(
 )
 
 // define recipe schema in mongoose model. First parameter is the name, second parameter is the schema
-const Recipe = mongoose.model('Recipe', recipeSchema)
+const RecipeModel = mongoose.model('Recipe', recipeSchema)
 
 // Export Recipe schema for access in other files
-module.exports = Recipe
+module.exports = RecipeModel

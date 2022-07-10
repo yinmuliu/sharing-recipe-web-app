@@ -1,0 +1,34 @@
+<%- include('../partials/head.ejs') %>
+<nav>
+    <a href="<%= baseUrl %>">Home icon</a>
+    <a href="<%= baseUrl %>/recipe">View All Recipes</a>
+</nav>
+<h1><%= recipe.title %></h1>
+<img src="<%= recipe.img %>" alt="<%= recipe.title %>">
+<p><%= recipe.description %></p>
+<p>Serving: <%= recipe.serves %></p>
+<p>Cook time: <%= recipe.cookTime %>mins</p>
+<p>Created by: <%= recipe.author %></p>
+<div class="ingredients">
+    <h2>Ingredients: </h2>
+    <ul>
+        <% for (let ingredient of recipe.ingredients) { %>
+        <li><%= ingredient %></li>
+        <% } %>
+    </ul>
+</div>
+<div class="methods">
+    <h2>Methods: </h2>
+    <ul>
+        <% for (let step of recipe.methods) { %>
+        <li><%= step %></li>
+        <% } %>
+    </ul>
+</div>
+<div>
+    <a href="<%= baseUrl %>/recipe/<%= recipe.id %>/edit">Edit Recipe</a>
+    <form action="<%= baseUrl %>/<%= recipe.id %>?_method=delete" method="post">
+        <input type="submit" value="Delete Recipe">
+    </form>
+</div>
+<%- include('../partials/footer.ejs') %>

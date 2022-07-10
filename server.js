@@ -2,16 +2,20 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
+const methodOverride = require('method-override')
 
 const app = express()
 const PORT = process.env.PORT
 const dbURL = process.env.MONGODB_URL
-const recipeRouter = require('./controllers/recipes')
-
-app.use('/', recipeRouter)
+const recipeRouter = require('./controllers/recipeRouter')
 
 // ========== MIDDLEWARE ========= //
+app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'))
+app.use(methodOverride('_method'))
 
+// ========== ROUTER ============ //
+app.use('/easypeasy', recipeRouter) 
 
 // ========== INITIALISATION ========= //
 mongoose.connect(dbURL, () => {
