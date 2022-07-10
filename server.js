@@ -11,10 +11,11 @@ const recipeRouter = require('./controllers/recipeRouter')
 
 // ========== MIDDLEWARE ========= //
 app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'))
 app.use(methodOverride('_method'))
+
+// ========== ROUTER ============ //
 app.use('/easypeasy', recipeRouter) 
-
-
 
 // ========== INITIALISATION ========= //
 mongoose.connect(dbURL, () => {

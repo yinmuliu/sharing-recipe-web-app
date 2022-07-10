@@ -5,6 +5,21 @@ const recipeRouter = express.Router()
 // Require recipe schema
 const RecipeModel = require('../models/recipeModel')
 
+// MIDDLEWARE
+const formatData = (req, res, next) => {
+    const defaultImg = 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg'
+    if (req.body.img === '') {
+        req.body.img = defaultImg
+    }
+    req.body.serves = parseInt(req.body.serves)
+    req.body.cookTime = parseInt(req.body.cookTime)
+    // req.body.ingredients = [req.body.ingredients]
+    // HOW TO BREAK A STRING TO ARRAY ELEMENTS
+    req.body.ingredients = req.body.ingredients.split(';')
+    req.body.methods = req.body.methods.split(';')
+    next()
+}
+
 // CREATE - allow user to enter new recipe data and store data in database
 // ============ NEW GET /recipe/new (render: new.ejs) ============ //
 recipeRouter.get('/recipe/new', (req, res) => {
@@ -15,18 +30,7 @@ recipeRouter.get('/recipe/new', (req, res) => {
 })
 
 // ============ CREATE POST (redirect to /recipe) ============ //
-recipeRouter.post('/', (req, res) => {
-    console.log(req.body);
-    // console.log(RecipeModel.img.default);
-    const defaultImg = 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg'
-    if (req.body.img === '') {
-        req.body.img = defaultImg
-    }
-    req.body.serves = parseInt(req.body.serves)
-    req.body.cookTime = parseInt(req.body.cookTime)
-    req.body.ingredients = [req.body.ingredients]
-    req.body.methods = [req.body.methods]
-    console.log(req.body);
+recipeRouter.post('/', formatData, (req, res) => {
     RecipeModel.create(req.body)
         .then(() => {
             res.redirect(req.baseUrl + `/recipe`)
@@ -89,19 +93,10 @@ recipeRouter.get('/recipe/:id/edit', (req, res) => {
 })
 
 // ============ UPDATE PUT (redirect to: /recipe/:id) ============ //
-recipeRouter.put('/recipe/:id/edit', (req, res) => {
-    const defaultImg = 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg'
-    if (req.body.img === '') {
-        req.body.img = defaultImg
-    }
-    req.body.serves = parseInt(req.body.serves)
-    req.body.cookTime = parseInt(req.body.cookTime)
-    req.body.ingredients = [req.body.ingredients]
-    req.body.methods = [req.body.methods]
+recipeRouter.put('/recipe/:id/edit', formatData, (req, res) => {
     const updatedRecipe = RecipeModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .exec()
         .then((updatedRecipe) => {
-            console.log(updatedRecipe);
             res.redirect(req.baseUrl + `/recipe/${req.params.id}`)
         })
         .catch((err) => {
