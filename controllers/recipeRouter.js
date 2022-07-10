@@ -90,12 +90,22 @@ recipeRouter.put('/recipe/:id/edit', (req, res) => {
         .exec()
         .then((updatedRecipe) => {
             console.log(updatedRecipe);
-            res.redirect(`/recipe/${updatedRecipe.id}`)
+            res.redirect(`/recipe/${req.params.id}`)
+        })
+        .catch((err) => {
+            console.log("Error updating new recipe:", err);
         })
 })
 
 // DELETE - allow user to delete and existing recipe (from the db as well)
 // ============ DELETE DELETE (redirect to: /recipe) ============ //
+recipeRouter.delete('/:id', (req, res) => {
+    RecipeModel.findByIdAndDelete(req.params.id)
+        .exec()
+        .then(() => {
+            res.redirect('/recipe')
+        })         
+})
 
 // Export router for access in server.js
 module.exports = recipeRouter

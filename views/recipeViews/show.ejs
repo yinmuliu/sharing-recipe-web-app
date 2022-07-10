@@ -26,4 +26,7 @@
 </div>
 <div>
     <a href="/recipe/<%= recipe.id %>/edit">Edit Recipe</a>
+    <form action="/<%= recipe.id %>?_method=delete" method="post">
+        <input type="submit" value="Delete Recipe">
+    </form>
 </div>
