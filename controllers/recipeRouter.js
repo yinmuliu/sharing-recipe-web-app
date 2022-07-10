@@ -45,7 +45,6 @@ recipeRouter.get('/recipe', (req, res) => {
     RecipeModel.find()
         .exec()
         .then((recipes) => {
-            console.log(recipes);
             res.render('recipeViews/index.ejs', {
                 allRecipes: recipes,
                 tabTitle: 'all recipe'
@@ -56,13 +55,22 @@ recipeRouter.get('/recipe', (req, res) => {
 // READ - show user the page of a specific recipe
 // ============ SHOW GET /recipe/:id (render: show.ejs) ============ //
 recipeRouter.get('/recipe/:id', (req, res) => {
-    res.send('show recipe id' + req.params.id)
+    console.log(req.baseUrl);
+    RecipeModel.findById(req.params.id)
+        .exec()
+        .then((recipe) => {
+            res.render('recipeViews/show.ejs', {
+                recipe: recipe,
+                baseUrl: req.baseUrl,
+                tabTitle: `${recipe.title}`
+            })
+        })
 })
 
 // UPDATE - allow user to edit an existing recipe and update the data in db
 // ============ EDIT GET /recipe/:id/edit (render: edit.ejs) ============ //
 recipeRouter.get('/recipe/:id/edit', (req, res) => {
-    res.send('edit recipe id' + req.params.id)
+    res.render('recipeViews/edit.ejs')
 })
 
 // ============ UPDATE PUT (redirect to: /recipe/:id) ============ //
