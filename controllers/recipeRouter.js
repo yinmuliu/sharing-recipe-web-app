@@ -55,7 +55,7 @@ recipeRouter.get('/recipe', (req, res) => {
 // READ - show user the page of a specific recipe
 // ============ SHOW GET /recipe/:id (render: show.ejs) ============ //
 recipeRouter.get('/recipe/:id', (req, res) => {
-    console.log(req.baseUrl);
+    // console.log(req.baseUrl);
     RecipeModel.findById(req.params.id)
         .exec()
         .then((recipe) => {
@@ -70,10 +70,29 @@ recipeRouter.get('/recipe/:id', (req, res) => {
 // UPDATE - allow user to edit an existing recipe and update the data in db
 // ============ EDIT GET /recipe/:id/edit (render: edit.ejs) ============ //
 recipeRouter.get('/recipe/:id/edit', (req, res) => {
-    res.render('recipeViews/edit.ejs')
+    RecipeModel.findById(req.params.id)
+        .exec()
+        .then((recipe) => {
+            res.render('recipeViews/edit.ejs', {
+                recipe: recipe,
+                tabTitle: `Edit ${recipe.title}`
+            })
+        })
 })
 
 // ============ UPDATE PUT (redirect to: /recipe/:id) ============ //
+recipeRouter.put('/recipe/:id/edit', (req, res) => {
+    req.body.serves = parseInt(req.body.serves)
+    req.body.cookTime = parseInt(req.body.cookTime)
+    req.body.ingredients = [req.body.ingredients]
+    req.body.methods = [req.body.methods]
+    const updatedRecipe = RecipeModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        .exec()
+        .then((updatedRecipe) => {
+            console.log(updatedRecipe);
+            res.redirect(`/recipe/${updatedRecipe.id}`)
+        })
+})
 
 // DELETE - allow user to delete and existing recipe (from the db as well)
 // ============ DELETE DELETE (redirect to: /recipe) ============ //
