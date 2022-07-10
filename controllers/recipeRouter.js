@@ -16,7 +16,12 @@ recipeRouter.get('/recipe/new', (req, res) => {
 
 // ============ CREATE POST (redirect to /recipe) ============ //
 recipeRouter.post('/', (req, res) => {
-    console.log('post request received');
+    console.log(req.body);
+    // console.log(RecipeModel.img.default);
+    const defaultImg = 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg'
+    if (req.body.img === '') {
+        req.body.img = defaultImg
+    }
     req.body.serves = parseInt(req.body.serves)
     req.body.cookTime = parseInt(req.body.cookTime)
     req.body.ingredients = [req.body.ingredients]
@@ -24,7 +29,8 @@ recipeRouter.post('/', (req, res) => {
     console.log(req.body);
     RecipeModel.create(req.body)
         .then(() => {
-            res.redirect(req.baseUrl + '/recipe')
+            res.redirect(req.baseUrl + `/recipe`)
+            // how to direct to recipe show page?
         })
         .catch((err) => {
             console.log("Error creating new recipe:", err);
@@ -84,6 +90,10 @@ recipeRouter.get('/recipe/:id/edit', (req, res) => {
 
 // ============ UPDATE PUT (redirect to: /recipe/:id) ============ //
 recipeRouter.put('/recipe/:id/edit', (req, res) => {
+    const defaultImg = 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg'
+    if (req.body.img === '') {
+        req.body.img = defaultImg
+    }
     req.body.serves = parseInt(req.body.serves)
     req.body.cookTime = parseInt(req.body.cookTime)
     req.body.ingredients = [req.body.ingredients]
