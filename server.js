@@ -12,7 +12,7 @@ const recipeRouter = require('./controllers/recipeRouter')
 // ========== MIDDLEWARE ========= //
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
-app.use('/easypeasy', recipeRouter) 
+app.use('/', recipeRouter) 
 
 
 

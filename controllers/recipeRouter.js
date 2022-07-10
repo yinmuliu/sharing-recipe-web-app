@@ -36,7 +36,7 @@ recipeRouter.post('/', (req, res) => {
 recipeRouter.get('/', (req, res) => {
     res.render('recipeViews/home.ejs', {
         baseUrl: req.baseUrl,
-        tabTitle: 'Home'
+        tabTitle: 'EasyPeasy Home'
     })
 })
 
@@ -49,7 +49,7 @@ recipeRouter.get('/recipe', (req, res) => {
             res.render('recipeViews/index.ejs', {
                 allRecipes: recipes,
                 baseUrl: req.baseUrl,
-                tabTitle: 'all recipe'
+                tabTitle: 'View All Recipes'
             })
         })
 })
