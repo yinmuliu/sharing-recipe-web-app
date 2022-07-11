@@ -1,0 +1,15 @@
+<%- include('../partials/head.ejs') %>
+
+<div class="form-container">
+    <h1>Sign Up</h1>
+    <div class="flash-messages"></div>
+    <form action="<%= baseUrl %>" method="post">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required />
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required />
+        <input class="button button-primary" type="submit" value="Sign Up" />
+    </form>
+</div>
+
+<%- include('../partials/footer.ejs') %>
