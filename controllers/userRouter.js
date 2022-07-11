@@ -17,6 +17,7 @@ userRouter.get('/signup', (req, res) => {
 
 // ============ CREATE NEW USER IN DB: POST (redirect: /easypeasy) ============ //
 userRouter.post('/', (req, res) => {
+    // check if confirm-pw === pw
     // hash user password before putting info in db
     req.body.password = bcrypt.hashSync(
         req.body.password,
@@ -25,8 +26,12 @@ userRouter.post('/', (req, res) => {
     // create new user documents in current database
     UserModel.create(req.body)
         .then((newUser) => {
-            // console.log('created user is: ', newUser);
             res.redirect('/easypeasy')
+        })
+        .catch((err) => {
+            req.flash('info', `You're already with us! Please login or sign up with another username.`)
+            res.redirect(req.baseUrl + '/signup')
+            console.log('error');
         })
 })
 

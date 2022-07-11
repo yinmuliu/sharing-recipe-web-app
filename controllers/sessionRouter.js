@@ -23,7 +23,8 @@ sessionRouter.post('/login', (req, res) => {
         .then((user) => {
             // condition 1: user not found, please sign up first
             if(!user) {
-                res.redirect(req.baseUrl + '/login')
+                req.flash('error', `You're not one of us yet. How about signing up? :)`)
+                return res.redirect(req.baseUrl + '/login')
             } 
             // condition 2: found user, password correct/incorrect
             // if password correct
@@ -32,6 +33,7 @@ sessionRouter.post('/login', (req, res) => {
                 res.redirect('/easypeasy')
             } else {
                 // if password incorrect
+                req.flash('error', 'Oops! Username or password is incorrect. Try again?')
                 res.redirect(req.baseUrl + '/login')
             }
         })

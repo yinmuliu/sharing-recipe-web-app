@@ -20,8 +20,12 @@ app.use(methodOverride('_method'))
 app.use(session({
     secret: 'mochi the kitty',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 7 * 24 * 60 * 60 * 1000
+      }
 }))
+app.use(flash())
 
 // ========== ROUTER ============ //
 app.use('/user', sessionRouter)
