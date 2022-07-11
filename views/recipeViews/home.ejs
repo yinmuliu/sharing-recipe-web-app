@@ -5,8 +5,14 @@
         <a href="<%= baseUrl %>/recipe">All Recipes</a>
     </div>
     <div class="user">
+        <% if (currentUser) { %>
+            <form action="user/logout?_method=delete" method="post">
+                <input type="submit" value="Log Out">
+            </form>
+        <% } else { %>
         <a href="/user/login">Login</a>
         <a href="/user/signup">Sign Up</a>
+        <% } %>
     </div>
 </nav>
 <header>

@@ -45,6 +45,7 @@ recipeRouter.post('/', formatData, (req, res) => {
 // ============ HOME GET / (render: home.ejs) ============ //
 recipeRouter.get('/', (req, res) => {
     res.render('recipeViews/home.ejs', {
+        currentUser: req.session.currentUser,
         baseUrl: req.baseUrl,
         tabTitle: 'EasyPeasy Home'
     })
