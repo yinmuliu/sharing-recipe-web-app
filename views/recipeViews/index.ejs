@@ -1,8 +1,5 @@
 <%- include('../partials/head.ejs') %>
-<nav>
-    <a href="<%= baseUrl %>">Home icon</a>
-    <a href="<%= baseUrl %>/recipe/new">Share Recipe</a>
-</nav>
+
 <h1>All Recipes</h1>
 <main>
     <% for (let recipe of allRecipes) { %>
@@ -17,4 +14,5 @@
     </div>
     <% } %>
 </main>
+
 <%- include('../partials/footer.ejs') %>

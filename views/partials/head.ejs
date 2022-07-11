@@ -7,4 +7,23 @@
     <title><%= tabTitle %></title>
 </head>
 <body>
-    
+    <nav>
+        <div class="logo">
+            <a href="/easypeasy">Home</a>
+        </div>
+        <div class="navigation">
+            <a href="/easypeasy/recipe">All Recipes</a>
+            <a href="#">Search Recipes</a>
+        </div>
+        <div class="user">
+            <% if (currentUser) { %>
+                <a href="#"><%= currentUser.username %></a>
+                <form action="/user/logout?_method=delete" method="post">
+                    <input type="submit" value="Log Out">
+                </form>
+            <% } else { %>
+            <a href="/user/login">Login</a>
+            <a href="/user/signup">Sign Up</a>
+            <% } %>
+        </div>
+    </nav>

@@ -20,10 +20,19 @@ const formatData = (req, res, next) => {
     next()
 }
 
+const isAuthenticated = (req, res, next) => {
+    if(req.session.currentUser) {
+        return next()
+    } else {
+        res.redirect('/user/login')
+    }
+}
+
 // CREATE - allow user to enter new recipe data and store data in database
 // ============ NEW GET /recipe/new (render: new.ejs) ============ //
-recipeRouter.get('/recipe/new', (req, res) => {
+recipeRouter.get('/recipe/new', isAuthenticated, (req, res) => {
     res.render('recipeViews/new.ejs', {
+        currentUser: req.session.currentUser,
         baseUrl: req.baseUrl,
         tabTitle: 'Create New Recipe'
     })
@@ -44,10 +53,16 @@ recipeRouter.post('/', formatData, (req, res) => {
 // READ - show user the homepage with highlighted recipes
 // ============ HOME GET / (render: home.ejs) ============ //
 recipeRouter.get('/', (req, res) => {
-    res.render('recipeViews/home.ejs', {
-        baseUrl: req.baseUrl,
-        tabTitle: 'EasyPeasy Home'
-    })
+    RecipeModel.find()
+        .exec()
+        .then((recipes) => {
+            res.render('recipeViews/home.ejs', {
+                currentUser: req.session.currentUser,
+                allRecipes: recipes,
+                baseUrl: req.baseUrl,
+                tabTitle: 'EasyPeasy Home'
+            })
+        })
 })
 
 // READ - show user the page with all recipe
@@ -57,6 +72,7 @@ recipeRouter.get('/recipe', (req, res) => {
         .exec()
         .then((recipes) => {
             res.render('recipeViews/index.ejs', {
+                currentUser: req.session.currentUser,
                 allRecipes: recipes,
                 baseUrl: req.baseUrl,
                 tabTitle: 'View All Recipes'
@@ -71,6 +87,7 @@ recipeRouter.get('/recipe/:id', (req, res) => {
         .exec()
         .then((recipe) => {
             res.render('recipeViews/show.ejs', {
+                currentUser: req.session.currentUser,
                 recipe: recipe,
                 baseUrl: req.baseUrl,
                 tabTitle: `${recipe.title}`
@@ -80,11 +97,12 @@ recipeRouter.get('/recipe/:id', (req, res) => {
 
 // UPDATE - allow user to edit an existing recipe and update the data in db
 // ============ EDIT GET /recipe/:id/edit (render: edit.ejs) ============ //
-recipeRouter.get('/recipe/:id/edit', (req, res) => {
+recipeRouter.get('/recipe/:id/edit', isAuthenticated, (req, res) => {
     RecipeModel.findById(req.params.id)
         .exec()
         .then((recipe) => {
             res.render('recipeViews/edit.ejs', {
+                currentUser: req.session.currentUser,
                 recipe: recipe,
                 baseUrl: req.baseUrl,
                 tabTitle: `Edit ${recipe.title}`
@@ -106,7 +124,7 @@ recipeRouter.put('/recipe/:id/edit', formatData, (req, res) => {
 
 // DELETE - allow user to delete and existing recipe (from the db as well)
 // ============ DELETE DELETE (redirect to: /recipe) ============ //
-recipeRouter.delete('/:id', (req, res) => {
+recipeRouter.delete('/:id', isAuthenticated, (req, res) => {
     RecipeModel.findByIdAndDelete(req.params.id)
         .exec()
         .then(() => {

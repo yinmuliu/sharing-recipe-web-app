@@ -1,14 +1,5 @@
 <%- include('../partials/head.ejs') %>
-<nav>
-    <div class="logo"></div>
-    <div class="navigation">
-        <a href="<%= baseUrl %>/recipe">All Recipes</a>
-    </div>
-    <div class="user">
-        <a href="#">Login</a>
-        <a href="/user/signup">Sign Up</a>
-    </div>
-</nav>
+
 <header>
     <h1>Easy Peasy</h1>
     <h2>Share quick, easy and healthy recipes to the world!</h2>
@@ -19,6 +10,19 @@
 </header>
 <main>
     <h2>New Recipes</h2>
-    <div class="display"></div>
+    <div class="display">
+        <% for (let i = 0; i < allRecipes.length; i++) { %>
+            <div>
+                <a href="<%= baseUrl %>/recipe/<%= allRecipes[i].id %>">
+                    <img src="<%= allRecipes[i].img %>" alt="<%= allRecipes[i].title %>">
+                    <div class="infobar">
+                        <h3><%= allRecipes[i].title %></h3>
+                        <h3>Cook Time: <%= allRecipes[i].cookTime %>mins</h3>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+    </div>
 </main>
+
 <%- include('../partials/footer.ejs') %>
