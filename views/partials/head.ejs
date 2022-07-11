@@ -17,7 +17,7 @@
         </div>
         <div class="user">
             <% if (currentUser) { %>
-                <form action="user/logout?_method=delete" method="post">
+                <form action="/user/logout?_method=delete" method="post">
                     <input type="submit" value="Log Out">
                 </form>
             <% } else { %>

@@ -26,12 +26,11 @@ userRouter.post('/', (req, res) => {
     // create new user documents in current database
     UserModel.create(req.body)
         .then((newUser) => {
-            res.redirect('/easypeasy')
+            res.redirect('/user/login')
         })
         .catch((err) => {
             req.flash('info', `You're already with us! Please login or sign up with another username.`)
             res.redirect(req.baseUrl + '/signup')
-            console.log('error');
         })
 })
 

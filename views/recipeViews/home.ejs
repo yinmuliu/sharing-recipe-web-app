@@ -11,7 +11,7 @@
 <main>
     <h2>New Recipes</h2>
     <div class="display">
-        <% for (let i = 0; i < 4; i++) { %>
+        <% for (let i = 0; i < allRecipes.length; i++) { %>
             <div>
                 <a href="<%= baseUrl %>/recipe/<%= allRecipes[i].id %>">
                     <img src="<%= allRecipes[i].img %>" alt="<%= allRecipes[i].title %>">
