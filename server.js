@@ -10,6 +10,7 @@ const PORT = process.env.PORT
 const dbURL = process.env.MONGODB_URL
 const recipeRouter = require('./controllers/recipeRouter')
 const userRouter = require('./controllers/userRouter')
+const sessionRouter = require('./controllers/sessionRouter')
 
 // ========== MIDDLEWARE ========= //
 app.use(express.urlencoded({extended: true}))
@@ -17,12 +18,12 @@ app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(session({
     secret: 'mochi the kitty',
-    cookie: { maxAge: 300000 },
     resave: false,
     saveUninitialized: false
 }))
 
 // ========== ROUTER ============ //
+app.use('/user', sessionRouter)
 app.use('/user', userRouter)
 app.use('/easypeasy', recipeRouter) 
 
