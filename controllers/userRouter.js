@@ -9,12 +9,13 @@ const userRouter = express.Router()
 // ========== NEW USER: GET /user/signup (render: signup.ejs) ============ //
 userRouter.get('/signup', (req, res) => {
     res.render('userViews/signup.ejs', {
+        currentUser: req.session.currentUser,
         baseUrl: req.baseUrl,
         tabTitle: 'Sign Up'
     })
 })
 
-// ============ STORE NEW USER IN DB: POST (redirect: /easypeasy) ============ //
+// ============ CREATE NEW USER IN DB: POST (redirect: /easypeasy) ============ //
 userRouter.post('/', (req, res) => {
     // hash user password before putting info in db
     req.body.password = bcrypt.hashSync(

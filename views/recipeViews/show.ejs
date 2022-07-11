@@ -1,8 +1,5 @@
 <%- include('../partials/head.ejs') %>
-<nav>
-    <a href="<%= baseUrl %>">Home icon</a>
-    <a href="<%= baseUrl %>/recipe">View All Recipes</a>
-</nav>
+
 <h1><%= recipe.title %></h1>
 <img src="<%= recipe.img %>" alt="<%= recipe.title %>">
 <p><%= recipe.description %></p>
@@ -31,4 +28,5 @@
         <input type="submit" value="Delete Recipe">
     </form>
 </div>
+
 <%- include('../partials/footer.ejs') %>
