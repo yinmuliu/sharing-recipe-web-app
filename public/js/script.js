@@ -45,10 +45,10 @@ const addMethodsInput = () => {
     methodsDiv.insertBefore(newInput, addMethodsSign)
 }
 
-if (addIngredientsSign !== null && addMethodsSign !== null) {
-    addIngredientsSign.addEventListener('click', addIngredientsInput)
-    addMethodsSign.addEventListener('click', addMethodsInput)
-}
+
+addIngredientsSign.addEventListener('click', addIngredientsInput)
+addMethodsSign.addEventListener('click', addMethodsInput)
+
 
 
 

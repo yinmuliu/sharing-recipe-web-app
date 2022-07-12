@@ -14,10 +14,20 @@ const formatData = (req, res, next) => {
     }
     req.body.serves = parseInt(req.body.serves)
     req.body.cookTime = parseInt(req.body.cookTime)
-    // req.body.ingredients = [req.body.ingredients]
-    // HOW TO BREAK A STRING TO ARRAY ELEMENTS
-    req.body.ingredients = req.body.ingredients.split(';')
-    req.body.methods = req.body.methods.split(';')
+    // if only one string in array
+    // change string into array
+    // if arr element > 1
+    // filter out array element === ''
+    let ingredientsArr = req.body.ingredients
+    let methodsArr = req.body.methods
+    if (typeof ingredientsArr === 'string') {
+        req.body.ingredients = [req.body.ingredients]
+    } else if (typeof methodsArr === 'string') {
+        req.body.methods = [req.body.methods]
+    } else {
+        req.body.ingredients = ingredientsArr.filter(str => str !== '')
+        req.body.methods = methodsArr.filter(str => str !== '')
+    }
     return next()
 }
 
@@ -113,10 +123,12 @@ recipeRouter.get('/recipe/:id/edit', isAuthenticated, (req, res) => {
 
 // ============ UPDATE PUT (redirect to: /recipe/:id) ============ //
 recipeRouter.put('/recipe/:id/edit', upload.single('img'), formatData, (req, res) => {
+    console.log('In Update route here');
+    console.log(req.body);
     const updatedRecipe = RecipeModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .exec()
         .then((updatedRecipe) => {
-            console.log(updatedRecipe);
+            // console.log(updatedRecipe);
             res.redirect(req.baseUrl + `/recipe/${req.params.id}`)
         })
         .catch((err) => {
