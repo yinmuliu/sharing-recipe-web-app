@@ -12,10 +12,6 @@ const formatData = (req, res, next) => {
     if (req.file) {
         req.body.img = req.file.path
     }
-    if (req.body.img === '' || req.body.img === null || req.body.img === undefined) {
-        const defaultImg = 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg'
-        req.body.img = defaultImg
-    }
     req.body.serves = parseInt(req.body.serves)
     req.body.cookTime = parseInt(req.body.cookTime)
     // req.body.ingredients = [req.body.ingredients]
