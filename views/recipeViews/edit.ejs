@@ -3,10 +3,13 @@
 <h1>Edit Recipe</h1>
 <main>
     <h1></h1>
-    <form action="<%= baseUrl %>/recipe/<%= recipe.id %>/edit?_method=put" method="post">
+    <form 
+        action="<%= baseUrl %>/recipe/<%= recipe.id %>/edit?_method=put" 
+        method="post" 
+        enctype="multipart/form-data">
         <div>
-            <label for="img">Update image url</label>
-            <input type="text" name="img" id="img" value="<%= recipe.img %>">
+            <label for="img">Upload image</label>
+            <input type="file" name="img" id="img" value="<%= recipe.img %>">
         </div>
     
         <div>

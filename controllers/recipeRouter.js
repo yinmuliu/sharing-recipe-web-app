@@ -2,13 +2,18 @@
 const express = require('express')
 // Set recipe router
 const recipeRouter = express.Router()
+// Require upload middleware
+const upload = require('../middlewares/upload')
 // Require recipe schema
 const RecipeModel = require('../models/recipeModel')
 
 // MIDDLEWARE
 const formatData = (req, res, next) => {
-    const defaultImg = 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg'
-    if (req.body.img === '') {
+    if (req.file) {
+        req.body.img = req.file.path
+    }
+    if (req.body.img === '' || req.body.img === null || req.body.img === undefined) {
+        const defaultImg = 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg'
         req.body.img = defaultImg
     }
     req.body.serves = parseInt(req.body.serves)
@@ -17,7 +22,7 @@ const formatData = (req, res, next) => {
     // HOW TO BREAK A STRING TO ARRAY ELEMENTS
     req.body.ingredients = req.body.ingredients.split(';')
     req.body.methods = req.body.methods.split(';')
-    next()
+    return next()
 }
 
 const isAuthenticated = (req, res, next) => {
@@ -39,7 +44,7 @@ recipeRouter.get('/recipe/new', isAuthenticated, (req, res) => {
 })
 
 // ============ CREATE POST (redirect to /recipe) ============ //
-recipeRouter.post('/', formatData, (req, res) => {
+recipeRouter.post('/', upload.single('img'), formatData, (req, res) => {
     RecipeModel.create(req.body)
         .then(() => {
             res.redirect(req.baseUrl + `/recipe`)
@@ -111,10 +116,11 @@ recipeRouter.get('/recipe/:id/edit', isAuthenticated, (req, res) => {
 })
 
 // ============ UPDATE PUT (redirect to: /recipe/:id) ============ //
-recipeRouter.put('/recipe/:id/edit', formatData, (req, res) => {
+recipeRouter.put('/recipe/:id/edit', upload.single('img'), formatData, (req, res) => {
     const updatedRecipe = RecipeModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .exec()
         .then((updatedRecipe) => {
+            console.log(updatedRecipe);
             res.redirect(req.baseUrl + `/recipe/${req.params.id}`)
         })
         .catch((err) => {
