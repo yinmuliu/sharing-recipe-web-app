@@ -38,11 +38,13 @@
         <div>
             <label for="ingredients">Ingredients</label>
             <input type="textarea" name="ingredients" id="ingredients" value="<%= recipe.ingredients %>">
+            <button class="multi-ingredients">Add ingredients</button>
         </div> 
     
         <div>
             <label for="methods">Methods</label>
             <input type="textarea" name="methods" id="methods" value="<%= recipe.methods %>">
+            <button class="multi-methods">Add another step</button>
         </div>
         
         <input type="submit" value="Update">

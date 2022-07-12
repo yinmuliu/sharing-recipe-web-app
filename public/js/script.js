@@ -1,2 +1,6 @@
+// Select elements
+const addIngredientsButton = document.querySelector('.multi-ingredients')
+const addMethodsButton = document.querySelector('.multi-methods')
 
-// DOM FOR CREATE/EDIT PAGE
+// When onclick, another textarea input is added.
+addIngredientsButton.addEventListener('click', addIngredientsInput)
