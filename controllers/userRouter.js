@@ -2,6 +2,7 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 
 const UserModel = require('../models/userModel')
+const RecipeModel = require('../models/recipeModel')
 
 const userRouter = express.Router()
 

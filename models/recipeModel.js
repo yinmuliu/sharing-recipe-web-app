@@ -10,24 +10,21 @@ const recipeSchema = new Schema(
     description: String,
     serves: { type: Number, required: true },
     cookTime: { type: Number, required: true, max: 60 },
-    ingredients: [ { 
-      type: String, 
-      required: true, 
-      default: 'The author has not entered any ingredients yet' 
-    } ],
+    ingredients: { 
+      type: Array, 
+      required: true
+    },
     methods: [ { 
       type: String, 
-      required: true, 
-      default: 'The author has not entered any methods yet'
+      required: true
     } ],
     img: { 
       type: String, 
       default: 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg' 
     },
     author: {
-      type: String
-      // type: Schema.Types.ObjectId,
-      // ref: 'User'
+      type: Schema.Types.ObjectId,
+      ref: 'User'
     }
   },
   { timestamps: true }

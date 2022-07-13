@@ -6,6 +6,7 @@ const recipeRouter = express.Router()
 const upload = require('../middlewares/upload')
 // Require recipe schema
 const RecipeModel = require('../models/recipeModel')
+const UserModel = require('../models/userModel')
 
 // MIDDLEWARE
 const formatData = (req, res, next) => {
@@ -26,6 +27,7 @@ const formatData = (req, res, next) => {
     if (typeof req.body.methods === 'object') {
         req.body.methods = req.body.methods.filter(str => str !== '')
     }
+    req.body.author = req.session.currentUser
     return next()
 }
 
@@ -93,8 +95,10 @@ recipeRouter.get('/recipe', (req, res) => {
 // ============ SHOW GET /recipe/:id (render: show.ejs) ============ //
 recipeRouter.get('/recipe/:id', (req, res) => {
     RecipeModel.findById(req.params.id)
+        .populate('author')
         .exec()
         .then((recipe) => {
+            console.log(recipe)
             res.render('recipeViews/show.ejs', {
                 currentUser: req.session.currentUser,
                 recipe: recipe,
