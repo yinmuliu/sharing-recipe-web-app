@@ -2,22 +2,31 @@
 const express = require('express')
 // Set recipe router
 const recipeRouter = express.Router()
+// Require upload middleware
+const upload = require('../middlewares/upload')
 // Require recipe schema
 const RecipeModel = require('../models/recipeModel')
 
 // MIDDLEWARE
 const formatData = (req, res, next) => {
-    const defaultImg = 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg'
-    if (req.body.img === '') {
-        req.body.img = defaultImg
+    if (req.file) {
+        req.body.img = req.file.path
     }
     req.body.serves = parseInt(req.body.serves)
     req.body.cookTime = parseInt(req.body.cookTime)
-    // req.body.ingredients = [req.body.ingredients]
-    // HOW TO BREAK A STRING TO ARRAY ELEMENTS
-    req.body.ingredients = req.body.ingredients.split(';')
-    req.body.methods = req.body.methods.split(';')
-    next()
+    if (typeof req.body.ingredients === 'string') {
+        req.body.ingredients = [req.body.ingredients]
+    } 
+    if (typeof req.body.methods === 'string') {
+        req.body.methods = [req.body.methods]
+    }
+    if (typeof req.body.ingredients === 'object') {
+        req.body.ingredients = req.body.ingredients.filter(str => str !== '')
+    }
+    if (typeof req.body.methods === 'object') {
+        req.body.methods = req.body.methods.filter(str => str !== '')
+    }
+    return next()
 }
 
 const isAuthenticated = (req, res, next) => {
@@ -39,7 +48,7 @@ recipeRouter.get('/recipe/new', isAuthenticated, (req, res) => {
 })
 
 // ============ CREATE POST (redirect to /recipe) ============ //
-recipeRouter.post('/', formatData, (req, res) => {
+recipeRouter.post('/', upload.single('img'), formatData, (req, res) => {
     RecipeModel.create(req.body)
         .then(() => {
             res.redirect(req.baseUrl + `/recipe`)
@@ -111,10 +120,13 @@ recipeRouter.get('/recipe/:id/edit', isAuthenticated, (req, res) => {
 })
 
 // ============ UPDATE PUT (redirect to: /recipe/:id) ============ //
-recipeRouter.put('/recipe/:id/edit', formatData, (req, res) => {
+recipeRouter.put('/recipe/:id/edit', upload.single('img'), formatData, (req, res) => {
+    console.log('In Update route here');
+    console.log(req.body);
     const updatedRecipe = RecipeModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .exec()
         .then((updatedRecipe) => {
+            // console.log(updatedRecipe);
             res.redirect(req.baseUrl + `/recipe/${req.params.id}`)
         })
         .catch((err) => {

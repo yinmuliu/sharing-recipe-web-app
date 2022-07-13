@@ -2,10 +2,13 @@
 
 <h1>Create New Recipe</h1>
 <p>At Easy Peasy, we love quick and easy recipes that can be prepared under 60 minutes!</p>
-<form action="<%= baseUrl %>" method="post">
+<form action="<%= baseUrl %>" method="post" enctype="multipart/form-data">
     <div>
-        <label for="img">Upload image url</label>
-        <input type="text" name="img" id="img">
+        <img src="https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg" 
+            alt="default_image" 
+            class="recipe_img_target">
+        <label for="img">Upload Image</label>
+        <input type="file" name="img" id="img">
     </div>
 
     <div>
@@ -34,14 +37,22 @@
         <label for="cookTime">mins</label>
     </div>
 
-    <div>
+    <div class="ingredients">
         <label for="ingredients">Ingredients</label>
         <input type="textarea" name="ingredients" id="ingredients">
+        <img src="https://i.pinimg.com/474x/46/a7/54/46a7543e3c15128e31050dfd0278e6c3.jpg" 
+                alt="plus_sign" 
+                class="multi-ingredients" 
+                width="30">
     </div> 
 
-    <div>
+    <div class="methods">
         <label for="methods">Methods</label>
         <input type="textarea" name="methods" id="methods">
+        <img src="https://i.pinimg.com/474x/46/a7/54/46a7543e3c15128e31050dfd0278e6c3.jpg" 
+                alt="plus_sign" 
+                class="multi-methods" 
+                width="30">
     </div>
     
     <input type="submit" value="Create">

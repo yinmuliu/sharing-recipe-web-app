@@ -10,10 +10,25 @@ const recipeSchema = new Schema(
     description: String,
     serves: { type: Number, required: true },
     cookTime: { type: Number, required: true, max: 60 },
-    ingredients: [ { type: String } ],
-    methods: [ { type: String } ],
-    img: { type: String, default: 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg' },
-    author: String
+    ingredients: [ { 
+      type: String, 
+      required: true, 
+      default: 'The author has not entered any ingredients yet' 
+    } ],
+    methods: [ { 
+      type: String, 
+      required: true, 
+      default: 'The author has not entered any methods yet'
+    } ],
+    img: { 
+      type: String, 
+      default: 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg' 
+    },
+    author: {
+      type: String
+      // type: Schema.Types.ObjectId,
+      // ref: 'User'
+    }
   },
   { timestamps: true }
 )
