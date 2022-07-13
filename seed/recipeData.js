@@ -67,7 +67,7 @@ module.exports = [
             "Enjoy immediately!"
         ], 
         "img": "https://cdn.animalsaustralia.org/wp-content/uploads/sites/2/2021/12/01064542/26499_AA_VegKit_SmoothieBowl_full-768x605.jpg",
-        "author": "Vicki_V"
+        "author": "Vicki"
     },
     {
         "title": "Banana Oat Cookies",

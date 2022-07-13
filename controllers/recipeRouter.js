@@ -14,19 +14,17 @@ const formatData = (req, res, next) => {
     }
     req.body.serves = parseInt(req.body.serves)
     req.body.cookTime = parseInt(req.body.cookTime)
-    // if only one string in array
-    // change string into array
-    // if arr element > 1
-    // filter out array element === ''
-    let ingredientsArr = req.body.ingredients
-    let methodsArr = req.body.methods
-    if (typeof ingredientsArr === 'string') {
+    if (typeof req.body.ingredients === 'string') {
         req.body.ingredients = [req.body.ingredients]
-    } else if (typeof methodsArr === 'string') {
+    } 
+    if (typeof req.body.methods === 'string') {
         req.body.methods = [req.body.methods]
-    } else {
-        req.body.ingredients = ingredientsArr.filter(str => str !== '')
-        req.body.methods = methodsArr.filter(str => str !== '')
+    }
+    if (typeof req.body.ingredients === 'object') {
+        req.body.ingredients = req.body.ingredients.filter(str => str !== '')
+    }
+    if (typeof req.body.methods === 'object') {
+        req.body.methods = req.body.methods.filter(str => str !== '')
     }
     return next()
 }
