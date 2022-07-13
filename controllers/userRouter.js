@@ -35,4 +35,22 @@ userRouter.post('/', (req, res) => {
         })
 })
 
+// ========== USER PAGE: GET /user/:id (render: userpage.ejs) ============ //
+// Display "My Recipe" with delete and edit button
+userRouter.get('/:id', (req, res) => {
+    UserModel.findById(req.params.id)
+        .exec()
+        .then((user) => {
+            RecipeModel.find()
+        })
+        .then((user) => {
+            res.render('userViews/userpage.ejs', {
+                user: user,
+                currentUser: req.session.currentUser,
+                baseUrl: req.baseUrl,
+                tabTitle: `${user.username}'s Homepage`
+            })
+        })
+})
+
 module.exports = userRouter

@@ -29,7 +29,7 @@
     <% } %>
 </div>
 
-<% if (currentUser === recipe.author.username) { %>
+<% if (currentUser.username === recipe.author.username) { %>
 <div>
     <a href="<%= baseUrl %>/recipe/<%= recipe.id %>/edit">Edit Recipe</a>
     <form action="<%= baseUrl %>/<%= recipe.id %>?_method=delete" method="post">

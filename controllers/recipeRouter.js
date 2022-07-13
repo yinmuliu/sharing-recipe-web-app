@@ -98,7 +98,6 @@ recipeRouter.get('/recipe/:id', (req, res) => {
         .populate('author')
         .exec()
         .then((recipe) => {
-            console.log(recipe)
             res.render('recipeViews/show.ejs', {
                 currentUser: req.session.currentUser,
                 recipe: recipe,
