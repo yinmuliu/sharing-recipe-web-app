@@ -42,12 +42,9 @@ userRouter.get('/:id', isAuthenticated, (req, res) => {
     const theUser = UserModel.findById(req.params.id)
         .exec()
         .then((theUser) => {
-            // console.log(theUser)
             RecipeModel.find({ author: theUser.id })
                 .exec()
                 .then((userRecipes) => {
-                    console.log(req.session.currentUser)
-                    console.log(req.session.currentUser.id)
                     res.render('userViews/userpage.ejs', {
                         myRecipes: userRecipes,
                         user: theUser,
@@ -56,9 +53,7 @@ userRouter.get('/:id', isAuthenticated, (req, res) => {
                         tabTitle: `${theUser.username}'s Homepage`
                     })
                 })
-            
         })
-    
 })
 
 module.exports = userRouter

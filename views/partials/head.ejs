@@ -19,7 +19,7 @@
         </div>
         <div class="user">
             <% if (currentUser) { %>
-                <a href="/user/<%= currentUser.id %>"><%= currentUser.username %></a>
+                <a href="/user/<%= currentUser._id %>"><%= currentUser.username %></a>
                 <form action="/user/logout?_method=delete" method="post">
                     <input type="submit" value="Log Out">
                 </form>

@@ -127,7 +127,6 @@ recipeRouter.put('/recipe/:id/edit', upload.single('img'), formatData, (req, res
     const updatedRecipe = RecipeModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .exec()
         .then((updatedRecipe) => {
-            // console.log(updatedRecipe);
             res.redirect(req.baseUrl + `/recipe/${req.params.id}`)
         })
         .catch((err) => {

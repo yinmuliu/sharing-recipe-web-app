@@ -21,7 +21,6 @@ sessionRouter.post('/login', (req, res) => {
     UserModel.findOne({ username: req.body.username })
         .exec()
         .then((user) => {
-            console.log(user)
             // condition 1: user not found, please sign up first
             if(!user) {
                 req.flash('error', `You're not one of us yet. How about signing up? :)`)
