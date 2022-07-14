@@ -20,7 +20,7 @@ const recipeSchema = new Schema(
     } ],
     img: { 
       type: String, 
-      default: 'https://d1y37rophvf5gr.cloudfront.net/Content/images/recipe-default.jpg' 
+      default: 'https://tso.tastefullysimple.com/_/media/images/recipe-default-image.png' 
     },
     author: {
       type: Schema.Types.ObjectId,
