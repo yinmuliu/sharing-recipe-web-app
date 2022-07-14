@@ -31,14 +31,6 @@ const formatData = (req, res, next) => {
     return next()
 }
 
-// const isAuthenticated = (req, res, next) => {
-//     if(req.session.currentUser) {
-//         return next()
-//     } else {
-//         res.redirect('/user/login')
-//     }
-// }
-
 // CREATE - allow user to enter new recipe data and store data in database
 // ============ NEW GET /recipe/new (render: new.ejs) ============ //
 recipeRouter.get('/recipe/new', isAuthenticated, (req, res) => {
