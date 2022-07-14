@@ -18,6 +18,7 @@ sessionRouter.get('/login', (req, res) => {
 })
 // ============ LOGIN POST (redirect: /user/login or /easypeasy) ============ //
 sessionRouter.post('/login', (req, res) => {
+    console.log(req.body)
     UserModel.findOne({ username: req.body.username })
         .exec()
         .then((user) => {

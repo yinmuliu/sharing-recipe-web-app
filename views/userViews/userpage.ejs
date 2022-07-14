@@ -1,6 +1,9 @@
 <%- include('../partials/head.ejs') %>
 
 <h1>Hi! <%= user.username %></h1>
+<form action="/user/logout?_method=delete" method="post">
+    <input type="submit" value="Log Out">
+</form>
 <div>
     <h2>My Recipes</h2>
     <% if (myRecipes.length > 0) { %>
