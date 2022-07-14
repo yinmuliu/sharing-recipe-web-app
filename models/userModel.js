@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const userSchema = Schema({
     username: {type: String, unique: true, required: true},
     password: String,
-    // createdRecipes: [{
+    // recipes: [{
     //     type: Schema.Types.ObjectId,
     //     ref: 'Recipe'
     // }]

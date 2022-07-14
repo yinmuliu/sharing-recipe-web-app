@@ -1,0 +1,31 @@
+<%- include('../partials/head.ejs') %>
+
+<h1>Hi! <%= user.username %></h1>
+<div>
+    <h2>My Recipes</h2>
+    <% if (myRecipes.length > 0) { %>
+        <% for (let recipe of myRecipes) { %>
+            <div>
+                <a href="/easypeasy/recipe/<%= recipe.id %>">
+                    <img src="<%= recipe.img %>" alt="<%= recipe.title %>">
+                    <div class="infobar">
+                        <h3><%= recipe.title %></h3>
+                        <h3>Cook Time: <%= recipe.cookTime %>mins</h3>
+                    </div>
+                    <div class="editbar">
+                        <a href="/easypeasy/recipe/<%= recipe.id %>/edit">Edit</a>
+                        <form action="easypeasy/<%= recipe.id %>?_method=delete" method="post">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+    <% } else { %>
+        <p>You currently have no recipes.</p>
+        <a href="/easypeasy/recipe/new">Share your first recipe</a>
+        <a href="/easypeasy/recipe">View all recipes</a>
+    <% } %>
+</div>
+
+<%- include('../partials/footer.ejs') %>

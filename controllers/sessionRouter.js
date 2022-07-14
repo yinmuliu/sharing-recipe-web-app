@@ -30,7 +30,7 @@ sessionRouter.post('/login', (req, res) => {
             // if password correct
             if(bcrypt.compareSync(req.body.password, user.password)) {
                 req.session.currentUser = user
-                res.redirect('/easypeasy')
+                res.redirect('/user/' + user.id)
             } else {
                 // if password incorrect
                 req.flash('error', 'Oops! Username or password is incorrect. Try again?')
