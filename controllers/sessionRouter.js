@@ -21,6 +21,7 @@ sessionRouter.post('/login', (req, res) => {
     UserModel.findOne({ username: req.body.username })
         .exec()
         .then((user) => {
+            console.log(user)
             // condition 1: user not found, please sign up first
             if(!user) {
                 req.flash('error', `You're not one of us yet. How about signing up? :)`)
@@ -30,7 +31,7 @@ sessionRouter.post('/login', (req, res) => {
             // if password correct
             if(bcrypt.compareSync(req.body.password, user.password)) {
                 req.session.currentUser = user
-                res.redirect('/easypeasy')
+                res.redirect('/user/' + user.id)
             } else {
                 // if password incorrect
                 req.flash('error', 'Oops! Username or password is incorrect. Try again?')
