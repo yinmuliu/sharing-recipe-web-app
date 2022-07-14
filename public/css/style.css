@@ -1,6 +1,15 @@
 /* Modify the background color */
 
+a {
+    text-decoration: none;
+    color: grey;
+}
+
 .limit-form-width {
     max-width: 330px;
     padding: 15px;
+}
+
+.title-height {
+    min-height: 65px;
 }
