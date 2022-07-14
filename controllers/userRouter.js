@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 
 const UserModel = require('../models/userModel')
 const RecipeModel = require('../models/recipeModel')
+const isAuthenticated = require('../middlewares/authentication')
 
 const userRouter = express.Router()
 
@@ -37,20 +38,27 @@ userRouter.post('/', (req, res) => {
 
 // ========== USER PAGE: GET /user/:id (render: userpage.ejs) ============ //
 // Display "My Recipe" with delete and edit button
-userRouter.get('/:id', (req, res) => {
-    UserModel.findById(req.params.id)
+userRouter.get('/:id', isAuthenticated, (req, res) => {
+    const theUser = UserModel.findById(req.params.id)
         .exec()
-        .then((user) => {
-            RecipeModel.find()
+        .then((theUser) => {
+            console.log(theUser)
+            RecipeModel.find({ author: theUser.id })
+                .exec()
+                .then((userRecipes) => {
+                    console.log(userRecipes)
+                    console.log(req.session.currentUser)
+                    res.render('userViews/userpage.ejs', {
+                        myRecipes: userRecipes,
+                        user: theUser,
+                        currentUser: req.session.currentUser,
+                        baseUrl: req.baseUrl,
+                        tabTitle: `${theUser.username}'s Homepage`
+                    })
+                })
+            
         })
-        .then((user) => {
-            res.render('userViews/userpage.ejs', {
-                user: user,
-                currentUser: req.session.currentUser,
-                baseUrl: req.baseUrl,
-                tabTitle: `${user.username}'s Homepage`
-            })
-        })
+    
 })
 
 module.exports = userRouter

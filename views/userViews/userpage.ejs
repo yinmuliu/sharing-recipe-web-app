@@ -1,17 +1,18 @@
+<%- include('../partials/head.ejs') %>
 
-<h1>User: <%= user.username %></h1>
+<h1>Hi! <%= user.username %></h1>
 <div>
     <h2>My Recipes</h2>
     <% for (let recipe of myRecipes) { %>
         <div>
-            <a href="easypeasy/recipe/<%= recipe.id %>">
+            <a href="/easypeasy/recipe/<%= recipe.id %>">
                 <img src="<%= recipe.img %>" alt="<%= recipe.title %>">
                 <div class="infobar">
                     <h3><%= recipe.title %></h3>
                     <h3>Cook Time: <%= recipe.cookTime %>mins</h3>
                 </div>
                 <div class="editbar">
-                    <a href="easypeasy/recipe/<%= recipe.id %>/edit">Edit</a>
+                    <a href="/easypeasy/recipe/<%= recipe.id %>/edit">Edit</a>
                     <form action="<%= baseUrl %>/<%= recipe.id %>?_method=delete" method="post">
                         <input type="submit" value="Delete">
                     </form>
@@ -20,3 +21,5 @@
         </div>
     <% } %>
 </div>
+
+<%- include('../partials/footer.ejs') %>

@@ -4,9 +4,9 @@ const express = require('express')
 const recipeRouter = express.Router()
 // Require upload middleware
 const upload = require('../middlewares/upload')
+const isAuthenticated = require('../middlewares/authentication')
 // Require recipe schema
 const RecipeModel = require('../models/recipeModel')
-const UserModel = require('../models/userModel')
 
 // MIDDLEWARE
 const formatData = (req, res, next) => {
@@ -31,13 +31,13 @@ const formatData = (req, res, next) => {
     return next()
 }
 
-const isAuthenticated = (req, res, next) => {
-    if(req.session.currentUser) {
-        return next()
-    } else {
-        res.redirect('/user/login')
-    }
-}
+// const isAuthenticated = (req, res, next) => {
+//     if(req.session.currentUser) {
+//         return next()
+//     } else {
+//         res.redirect('/user/login')
+//     }
+// }
 
 // CREATE - allow user to enter new recipe data and store data in database
 // ============ NEW GET /recipe/new (render: new.ejs) ============ //
@@ -93,7 +93,7 @@ recipeRouter.get('/recipe', (req, res) => {
 
 // READ - show user the page of a specific recipe
 // ============ SHOW GET /recipe/:id (render: show.ejs) ============ //
-recipeRouter.get('/recipe/:id', (req, res) => {
+recipeRouter.get('/recipe/:id', isAuthenticated, (req, res) => {
     RecipeModel.findById(req.params.id)
         .populate('author')
         .exec()
@@ -124,8 +124,6 @@ recipeRouter.get('/recipe/:id/edit', isAuthenticated, (req, res) => {
 
 // ============ UPDATE PUT (redirect to: /recipe/:id) ============ //
 recipeRouter.put('/recipe/:id/edit', upload.single('img'), formatData, (req, res) => {
-    console.log('In Update route here');
-    console.log(req.body);
     const updatedRecipe = RecipeModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .exec()
         .then((updatedRecipe) => {
