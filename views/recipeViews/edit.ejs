@@ -1,62 +1,67 @@
 <%- include('../partials/head.ejs') %>
-
-<h1>Edit Recipe</h1>
-<main>
-    <h1></h1>
-    <form 
-        action="<%= baseUrl %>/recipe/<%= recipe.id %>/edit?_method=put" 
-        method="post" 
-        enctype="multipart/form-data">
-        <div>
-            <img src="<%= recipe.img %>" alt="<%= recipe.title %>" class="recipe_img_target">
-            <label for="img">Update image</label>
-            <input type="file" name="img" id="img">
-        </div>
-    
-        <div>
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" value="<%= recipe.title %>" required>
-        </div>
-    
-        <div>
-            <label for="description">Description</label>
-            <input type="textarea" name="description" id="description" value="<%= recipe.description %>">
-        </div>
-    
-        <div>
-            <label for="serves">Serves</label>
-            <input type="number" name="serves" id="serves" min="1" value="<%= recipe.serves %>" required>
-        </div>
-    
-        <div>
-            <label for="cookTime">Cook time</label>
-            <input type="number" name="cookTime" id="cookTime" min="1" max="60" value="<%= recipe.cookTime %>"required>
-            <label for="cookTime">mins</label>
-        </div>
-    
-        <div class="ingredients">
-            <label for="ingredients">Ingredients</label>
-            <% for (let ingredient of recipe.ingredients) { %>
-                <input type="textarea" name="ingredients" id="ingredients" value="<%= ingredient %>">
-            <% } %>
-            <img src="https://i.pinimg.com/474x/46/a7/54/46a7543e3c15128e31050dfd0278e6c3.jpg" 
-                alt="plus_sign" 
-                class="multi-ingredients" 
-                width="30">
-        </div> 
-    
-        <div class="methods">
-            <label for="methods">Methods</label>
-            <% for (let step of recipe.methods) { %>
-                <input type="textarea" name="methods" id="methods" value="<%= step %>">
-            <% } %>
-            <img src="https://i.pinimg.com/474x/46/a7/54/46a7543e3c15128e31050dfd0278e6c3.jpg" 
-                alt="plus_sign" 
-                class="multi-methods" 
-                width="30">
-        </div>
+<div  class="container-md">
+    <h1>Edit Recipe</h1>
+    <main>
+        <form
+            action="<%= baseUrl %>/recipe/<%= recipe.id %>/edit?_method=put" 
+            method="post" 
+            enctype="multipart/form-data">
+            <div>
+                <img src="<%= recipe.img %>" alt="<%= recipe.title %>" class="recipe_img_target" width="300">
+                <div class="mb-3">
+                    <label for="img" class="form-label m-2">Update image</label>
+                    <input class="form-control" type="file" name="img" id="img">
+                </div>
+            </div>
         
-        <input type="submit" value="Update">
-    </form>
-</main>
+            <div class="input-group mb-3">
+                <label for="title" class="input-group-text">Title</label>
+                <input class="form-control" placeholder="Title" type="text" name="title" id="title" value="<%= recipe.title %>" required>
+            </div>
+        
+            <div class="input-group mb-3">
+                <label for="description" class="input-group-text">Description</label>
+                <input class="form-control" placeholder="Description" type="textarea" name="description" id="description" value="<%= recipe.description %>">
+            </div>
+        
+            <div class="input-group mb-3">
+                <label for="serves" class="input-group-text">Serves</label>
+                <input class="form-control" placeholder="Number of serves" type="number" name="serves" id="serves" min="1" value="<%= recipe.serves %>" required>
+            </div>
+        
+            <div class="input-group mb-3">
+                <label for="cookTime" class="input-group-text">Cook time</label>
+                <input class="form-control" placeholder="Cook time in mins" type="number" name="cookTime" id="cookTime" min="1" max="60" value="<%= recipe.cookTime %>"required>
+                <label class="m-2" for="cookTime">mins</label>
+            </div>
+        
+            <div class="ingredients input-group mb-3">
+                <label for="ingredients" class="input-group-text">Ingredients</label>
+                <% for (let ingredient of recipe.ingredients) { %>
+                    <input class="form-control" placeholder="Enter 1 ingredient" type="textarea" name="ingredients" id="ingredients" value="<%= ingredient %>">
+                <% } %>
+                <img src="https://i.pinimg.com/474x/46/a7/54/46a7543e3c15128e31050dfd0278e6c3.jpg" 
+                    alt="plus_sign" 
+                    class="multi-ingredients" 
+                    width="30">
+            </div> 
+        
+            
+            <div class="methods input-group mb-3">
+                <label for="methods" class="input-group-text">Methods</label>
+                <% for (let step of recipe.methods) { %>
+                    <input class="form-control" placeholder="Enter 1 step" type="textarea" name="methods" id="methods" value="<%= step %>">
+                <% } %>
+                <img src="https://i.pinimg.com/474x/46/a7/54/46a7543e3c15128e31050dfd0278e6c3.jpg" 
+                    alt="plus_sign" 
+                    class="multi-methods" 
+                    width="30">
+            </div>
+            
+            
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </main>
+</div>
+
 <%- include('../partials/footer.ejs') %>

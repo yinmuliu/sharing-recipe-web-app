@@ -1,31 +1,40 @@
 <%- include('../partials/head.ejs') %>
 
-<h1>Hi! <%= user.username %></h1>
-<div>
-    <h2>My Recipes</h2>
-    <% if (myRecipes.length > 0) { %>
+<div class="album py-5 bg-light pt-1 pb-1"> 
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="display-5">Hi! <%= user.username %> :)</h1>
+            <form action="/user/logout?_method=delete" method="post">
+                <input class="input-group-text" type="submit" value="Log Out">
+            </form>
+        </div>
+        <h1 class="p-2 display-6">My Recipes</h1>
+      <% if (myRecipes.length > 0) { %>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 max">
         <% for (let recipe of myRecipes) { %>
-            <div>
-                <a href="/easypeasy/recipe/<%= recipe.id %>">
-                    <img src="<%= recipe.img %>" alt="<%= recipe.title %>">
-                    <div class="infobar">
-                        <h3><%= recipe.title %></h3>
-                        <h3>Cook Time: <%= recipe.cookTime %>mins</h3>
-                    </div>
-                    <div class="editbar">
-                        <a href="/easypeasy/recipe/<%= recipe.id %>/edit">Edit</a>
-                        <form action="easypeasy/<%= recipe.id %>?_method=delete" method="post">
-                            <input type="submit" value="Delete">
-                        </form>
-                    </div>
-                </a>
+        <div class="col" height="450">
+          <div class="card shadow-sm mb-3 card">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="<%= recipe.img %>" alt="<%= recipe.title %>" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <div class="card-body">
+                <h4 class="card-text title-height"><%= recipe.title %></h4>
+              <div class="d-flex justify-content-between align-items-center">
+                  <a class="input-group-text justify-content-center " href="/easypeasy/recipe/<%= recipe.id %>">View</a>
+                    <form action="/easypeasy/<%= recipe.id %>?_method=delete" method="post">
+                        <input class="input-group-text" type="submit" value="Delete">
+                    </form>
+              </div>
             </div>
+          </div>
+        </div>
         <% } %>
-    <% } else { %>
+      </div>
+      <% } else { %>
         <p>You currently have no recipes.</p>
-        <a href="/easypeasy/recipe/new">Share your first recipe</a>
-        <a href="/easypeasy/recipe">View all recipes</a>
-    <% } %>
+        <div class="d-flex align-items-center">
+            <a class="input-group-text justify-content-center" href="/easypeasy/recipe/new">Share your first recipe</a>
+        <a class="input-group-text justify-content-center m-3" href="/easypeasy/recipe">View all recipes</a>
+        </div>
+      <% } %>
+    </div>
 </div>
-
 <%- include('../partials/footer.ejs') %>

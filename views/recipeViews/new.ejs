@@ -1,56 +1,58 @@
 <%- include('../partials/head.ejs') %>
-
+<div  class="container-md">
 <h1>Create New Recipe</h1>
 <p>At Easy Peasy, we love quick and easy recipes that can be prepared under 60 minutes!</p>
 <form action="<%= baseUrl %>" method="post" enctype="multipart/form-data">
     <div>
         <img src= 'https://tso.tastefullysimple.com/_/media/images/recipe-default-image.png' 
             alt="default_image" 
-            class="recipe_img_target">
-        <label for="img">Upload Image</label>
-        <input type="file" name="img" id="img">
+            class="recipe_img_target" width="300">
+        <div class="mb-3">
+            <label for="img" class="form-label m-2">Upload Image</label>
+            <input class="form-control" type="file" name="img" id="img">
+        </div>
     </div>
 
-    <div>
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" required>
+    <div class="input-group mb-3">
+        <label for="title" class="input-group-text">Title</label>
+        <input class="form-control" placeholder="Title" type="text" name="title" id="title" required>
     </div>
 
-    <div>
-        <label for="description">Description</label>
-        <input type="textarea" name="description" id="description">
+    <div class="input-group mb-3">
+        <label for="description" class="input-group-text">Description</label>
+        <input class="form-control" placeholder="Description" type="textarea" name="description" id="description">
     </div>
 
-    <div>
-        <label for="serves">Serves</label>
-        <input type="number" name="serves" id="serves" min="1" required>
+    <div class="input-group mb-3">
+        <label for="serves" class="input-group-text">Serves</label>
+        <input class="form-control" placeholder="Number of serves" type="number" name="serves" id="serves" min="1" required>
     </div>
 
-    <div>
-        <label for="cookTime">Cook time</label>
-        <input type="number" name="cookTime" id="cookTime" min="1" max="60" required>
-        <label for="cookTime">mins</label>
+    <div class="input-group mb-3">
+        <label for="cookTime" class="input-group-text">Cook time</label>
+        <input class="form-control" placeholder="Cook time in mins" type="number" name="cookTime" id="cookTime" min="1" max="60" required>
+        <label class="m-2" for="cookTime">mins</label>
     </div>
 
-    <div class="ingredients">
-        <label for="ingredients">Ingredients</label>
-        <input type="textarea" name="ingredients" id="ingredients">
+    <div class="ingredients input-group mb-3">
+        <label for="ingredients" class="input-group-text">Ingredients</label>
+        <input class="form-control" placeholder="Enter 1 ingredient" type="textarea" name="ingredients" id="ingredients">
         <img src="https://i.pinimg.com/474x/46/a7/54/46a7543e3c15128e31050dfd0278e6c3.jpg" 
-                alt="plus_sign" 
-                class="multi-ingredients" 
-                width="30">
+            alt="plus_sign" 
+            class="multi-ingredients" 
+            width="30">
     </div> 
-
-    <div class="methods">
-        <label for="methods">Methods</label>
-        <input type="textarea" name="methods" id="methods">
+    <div class="methods input-group mb-3">
+        <label for="methods" class="input-group-text">Methods</label>
+        <input class="form-control" placeholder="Enter 1 step" type="textarea" name="methods" id="methods">
         <img src="https://i.pinimg.com/474x/46/a7/54/46a7543e3c15128e31050dfd0278e6c3.jpg" 
-                alt="plus_sign" 
-                class="multi-methods" 
-                width="30">
+            alt="plus_sign" 
+            class="multi-methods" 
+            width="30">
     </div>
     
-    <input type="submit" value="Create">
+    <button type="submit" class="btn btn-primary">Create</button>
 </form>
+</div>
 
 <%- include('../partials/footer.ejs') %>
