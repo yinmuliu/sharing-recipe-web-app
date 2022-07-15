@@ -13,3 +13,8 @@ a {
 .title-height {
     min-height: 65px;
 }
+
+.input-button-bar {
+    display: flex;
+    justify-content: space-between;
+}
