@@ -22,10 +22,12 @@ const addIngredientsInput = () => {
     // create a new input textarea
     const newInput = document.createElement('input')
     // add class/attributes to the input
+    newInput.classList.add("form-control")
     Object.assign(newInput, {
         type: 'textarea',
         name: 'ingredients',
-        id: 'ingredients',
+        id: 'ingredients'
+        
         // value: "<%= recipe.ingredients %>" for EDIT Page
         // CONNECTING TO BACKEND - Loop?
     })
@@ -35,6 +37,7 @@ const addIngredientsInput = () => {
 
 const addMethodsInput = () => {
     const newInput = document.createElement('input')
+    newInput.classList.add("form-control")
     Object.assign(newInput, {
         type: 'textarea',
         name: 'methods',
