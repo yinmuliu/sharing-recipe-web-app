@@ -1,42 +1,68 @@
 <%- include('../partials/head.ejs') %>
 
-<h1><%= recipe.title %></h1>
-<img src="<%= recipe.img %>" alt="<%= recipe.title %>">
-<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/scer-DlZkzk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-<p><%= recipe.description %></p>
-<p>Serving: <%= recipe.serves %></p>
-<p>Cook time: <%= recipe.cookTime %>mins</p>
-<p>Created by: <%= recipe.author.username %></p>
-<div class="ingredients">
-    <h2>Ingredients: </h2>
-    <% if (recipe.ingredients.length > 0) { %>
-    <ul>
-        <% for (let ingredient of recipe.ingredients) { %>
-        <li><%= ingredient %></li>
-        <% } %>
-    </ul> <% } else { %>
-        <p>The author has not entered any ingredients yet.</p>
-    <% } %>
-</div>
-<div class="methods">
-    <h2>Methods: </h2>
-    <% if (recipe.methods.length > 0) { %>
-    <ul>
-        <% for (let step of recipe.methods) { %>
-        <li><%= step %></li>
-        <% } %>
-    </ul> <% } else { %>
-        <p>The author has not entered any methods yet.</p>
-    <% } %>
-</div>
+<div class="container-md">
 
-<% if (currentUser.username === recipe.author.username) { %>
-<div>
-    <a href="<%= baseUrl %>/recipe/<%= recipe.id %>/edit">Edit Recipe</a>
-    <form action="<%= baseUrl %>/<%= recipe.id %>?_method=delete" method="post">
-        <input type="submit" value="Delete Recipe">
-    </form>
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+            <img src="<%= recipe.img %>" class="d-block mx-lg-auto img-fluid" alt="<%= recipe.title %>" width="700" height="500" loading="lazy">
+            <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/scer-DlZkzk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+          </div>
+          <div class="col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3"><%= recipe.title %></h1>
+            <p class="lead"><%= recipe.description %></p>
+
+
+            <% if (currentUser.username === recipe.author.username) { %>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="<%= baseUrl %>/recipe/<%= recipe.id %>/edit">
+                        <button type="button" class="btn btn-dark px-4 me-md-2" >Edit Recipe</button>
+                    </a>
+                    <form  action="<%= baseUrl %>/<%= recipe.id %>?_method=delete" method="post">
+                        <button class="btn btn-primary px-4 me-md-2" type="submit" >Delete Recipe</button>
+                    </form>
+                </div>
+            <% } %>
+          </div>
+        </div>
+    </div>
+
+    <div class="row g-5">
+        <div class="col-md-6">
+          <h2>Ingredients</h2>
+          <% if (recipe.ingredients.length > 0) { %>
+          <ul class="icon-list ps-0">
+            <% for (let ingredient of recipe.ingredients) { %>
+                <li class="d-flex align-items-start mb-1 "> -> <%= ingredient %></li>
+                <% } %>
+            <% } else { %>
+                <p>The author has not entered any ingredients yet.</p>
+            <% } %>
+          </ul>
+        </div>
+    
+        <div class="col-md-6">
+          <h2>Methods</h2>
+          <% if (recipe.methods.length > 0) { %>
+          <ol class="icon-list ps-0">
+            <% for (let step of recipe.methods) { %>
+                <li class="d-flex align-items-start mb-1"> -> <%= step %></li>
+                <% } %>
+            <% } else { %>
+                <p>The author has not entered any methods yet.</p>
+            <% } %>
+          </ol>
+        </div>
+      </div>
+    
+    <!-- <% if (currentUser.username === recipe.author.username) { %>
+    <div>
+        <a href="<%= baseUrl %>/recipe/<%= recipe.id %>/edit">Edit Recipe</a>
+        <form action="<%= baseUrl %>/<%= recipe.id %>?_method=delete" method="post">
+            <input type="submit" value="Delete Recipe">
+        </form>
+    </div>
+    <% } %> -->
 </div>
-<% } %>
 
 <%- include('../partials/footer.ejs') %>

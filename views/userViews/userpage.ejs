@@ -2,11 +2,13 @@
 
 <div class="album py-5 bg-light pt-1 pb-1"> 
     <div class="container">
-        <h1>Hi! <%= user.username %></h1>
-        <form action="/user/logout?_method=delete" method="post">
-            <input class="input-group-text" type="submit" value="Log Out">
-        </form>
-        <h1 class="p-2">My Recipes</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="display-5">Hi! <%= user.username %> :)</h1>
+            <form action="/user/logout?_method=delete" method="post">
+                <input class="input-group-text" type="submit" value="Log Out">
+            </form>
+        </div>
+        <h1 class="p-2 display-6">My Recipes</h1>
       <% if (myRecipes.length > 0) { %>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 max">
         <% for (let recipe of myRecipes) { %>
