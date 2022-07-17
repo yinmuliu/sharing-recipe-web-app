@@ -1,54 +1,54 @@
 <%- include('../partials/head.ejs') %>
-<div  class="container-md">
-<h1>Create New Recipe</h1>
-<p>At Easy Peasy, we love quick and easy recipes that can be prepared under 60 minutes!</p>
-<form action="<%= baseUrl %>" method="post" enctype="multipart/form-data">
+<div class="container-md">
+    <h1>Create New Recipe</h1>
+    <p>At Easy Peasy, we love quick and easy recipes that can be prepared under 60 minutes!</p>
+
+    <form action="<%= baseUrl %>" method="post" enctype="multipart/form-data">
     <div>
         <img src= 'https://tso.tastefullysimple.com/_/media/images/recipe-default-image.png' 
             alt="default_image" 
             class="recipe_img_target" width="300">
         <div class="mb-3">
-            <label for="img" class="form-label m-2">Upload Image</label>
+            <label for="img" class="form-label m-2">Upload Image: </label>
             <input class="form-control" type="file" name="img" id="img">
         </div>
     </div>
 
-    <div class="input-group mb-3">
-        <label for="title" class="input-group-text">Title</label>
+    <div class="mb-3">
+        <label for="title" class="form-label">Title: </label>
         <input class="form-control" placeholder="Title" type="text" name="title" id="title" required>
     </div>
 
-    <div class="input-group mb-3">
-        <label for="description" class="input-group-text">Description</label>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description: </label>
         <input class="form-control" placeholder="Description" type="textarea" name="description" id="description">
     </div>
 
-    <div class="input-group mb-3">
-        <label for="serves" class="input-group-text">Serves</label>
+    <div class="mb-3">
+        <label for="serves" class="form-label">Serves: </label>
         <input class="form-control" placeholder="Number of serves" type="number" name="serves" id="serves" min="1" required>
     </div>
 
-    <div class="input-group mb-3">
-        <label for="cookTime" class="input-group-text">Cook time</label>
-        <input class="form-control" placeholder="Cook time in mins" type="number" name="cookTime" id="cookTime" min="1" max="60" required>
-        <label class="m-2" for="cookTime">mins</label>
+    <div class="mb-3">
+        <label for="cookTime" class="form-label">Cook time: </label>
+        <input class="form-control" placeholder="Cook time in minutes" type="number" name="cookTime" id="cookTime" min="1" max="60" required>
     </div>
 
-    <div class="ingredients input-group mb-3">
-        <label for="ingredients" class="input-group-text">Ingredients</label>
-        <input class="form-control" placeholder="Enter 1 ingredient" type="textarea" name="ingredients" id="ingredients">
-        <img src="https://i.pinimg.com/474x/46/a7/54/46a7543e3c15128e31050dfd0278e6c3.jpg" 
-            alt="plus_sign" 
-            class="multi-ingredients" 
-            width="30">
+    <div class="ingredients mb-3">
+        <label for="ingredients" class="form-label">Ingredients: </label>
+        <input class="form-control m-1" placeholder="Enter 1 ingredient" type="textarea" name="ingredients" id="ingredients">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Ambox_emblem_plus.svg/2048px-Ambox_emblem_plus.svg.png" 
+                alt="plus_sign" 
+                class="multi-ingredients m-2 rounded mx-auto d-block" 
+                width="30">
     </div> 
-    <div class="methods input-group mb-3">
-        <label for="methods" class="input-group-text">Methods</label>
-        <input class="form-control" placeholder="Enter 1 step" type="textarea" name="methods" id="methods">
-        <img src="https://i.pinimg.com/474x/46/a7/54/46a7543e3c15128e31050dfd0278e6c3.jpg" 
-            alt="plus_sign" 
-            class="multi-methods" 
-            width="30">
+    <div class="methods mb-3">
+        <label for="methods" class="form-label">Methods: </label>
+        <input class="form-control m-1" placeholder="Enter 1 step" type="textarea" name="methods" id="methods">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Ambox_emblem_plus.svg/2048px-Ambox_emblem_plus.svg.png" 
+                alt="plus_sign" 
+                class="multi-methods m-2 rounded mx-auto d-block" 
+                width="30">
     </div>
     
     <button type="submit" class="btn btn-primary">Create</button>

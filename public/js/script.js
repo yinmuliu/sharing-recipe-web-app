@@ -23,13 +23,12 @@ const addIngredientsInput = () => {
     const newInput = document.createElement('input')
     // add class/attributes to the input
     newInput.classList.add("form-control")
+    newInput.classList.add("m-1")
     Object.assign(newInput, {
         type: 'textarea',
         name: 'ingredients',
-        id: 'ingredients'
-        
-        // value: "<%= recipe.ingredients %>" for EDIT Page
-        // CONNECTING TO BACKEND - Loop?
+        id: 'ingredients',
+        placeholder: "Enter 1 ingredient"
     })
     // append it to the div
     ingredientsDiv.insertBefore(newInput, addIngredientsSign)
@@ -38,12 +37,12 @@ const addIngredientsInput = () => {
 const addMethodsInput = () => {
     const newInput = document.createElement('input')
     newInput.classList.add("form-control")
+    newInput.classList.add("m-1")
     Object.assign(newInput, {
         type: 'textarea',
         name: 'methods',
         id: 'methods',
-        // value: "<%= recipe.methods %>"
-        // CONNECTING TO BACKEND - Loop?
+        placeholder: "Enter 1 step"
     })
     methodsDiv.insertBefore(newInput, addMethodsSign)
 }
