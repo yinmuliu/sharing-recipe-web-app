@@ -23,21 +23,15 @@
             <% } %>
           </div>
         </div>
-        <!-- <p>Serving: <%= recipe.serves %> Cook time: <%= recipe.cookTime %>mins Created by: <%= recipe.author.username %></p> -->
-        <div class="d-flex flex-wrap justify-content-center align-items-center my-4 ">
-        <div class="nav col-md-4 justify-content-start list-unstyled d-flex">
-          <span class="mb-3 mb-md-0 text-muted"> Serving: <%= recipe.serves %> </span>
+        
+        <div class="py-2 mb-3">
+          <ul class="nav justify-content-start">
+            <li class="nav-item px-3 text-muted">Serving: <%= recipe.serves %></li>
+            <li class="nav-item px-3 text-muted">Cook time: <%= recipe.cookTime %></li>
+            <li class="nav-item px-3 text-muted">Created by: <%= recipe.author.username %></li>
+          </ul>
         </div>
-        <div class="nav col-md-4 justify-content-start list-unstyled d-flex">
-          <span class="mb-3m mb-md-0 text-uted"> Cook time: <%= recipe.cookTime %> </span>
-        </div>
-        <div class="nav col-md-4 justify-content-start list-unstyled d-flex">
-          <span class="mb-3m mb-md-0 text-uted"> Created by: <%= recipe.author.username %> </span>
-        </div>
-        </div>
-
-        <!-- <p>Cook time: <%= recipe.cookTime %>mins</p>
-        <p>Created by: <%= recipe.author.username %></p> -->
+  
     </div>
 
     <div class="row g-5">
