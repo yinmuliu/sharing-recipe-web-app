@@ -48,10 +48,6 @@ Initial planning for a CRUD web app:
 
 To help myself keep track of the project scale and development, I set up an excel table based on CRUD (Create, Read, Update, Destroy) and map the URL, EJS files and Mongoose methods according to each functionality. During implementation, I was able to stick to this planning and add a few more functionality to it - user signup, login/logout and individual user’s page.
 
-## Bugs and solutions - fun bit!
-
-I am working on a reflection article on the new and educational bugs I encountered in this project. It will be published on my Medium blog once ready :)
-
 ## Improvement Ideas
 
 1. Add a search functionality - search recipes according to name, creator and keywords in ingredients!
